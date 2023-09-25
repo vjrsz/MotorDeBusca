@@ -44,4 +44,28 @@ while(1):
 
         print_result(cache[search])
 
-    
+    import xml.etree.ElementTree as ET
+from operator import itemgetter
+from collections import defaultdict
+
+tree = ET.parse("verbetesWikipedia.xml")
+root = tree.getroot()
+
+cache = defaultdict(lambda: 0)
+
+# Init Cache
+for page in root.findall('page'): # for in pages
+    title = page.find("title").text
+    text = page.find("text").text
+
+    # find word in title
+    for word in title.split():
+        if len(word) > 3 :
+            if not cache[word]:
+                cache[word] = list({
+                    "title": title,
+                    "occurences": 1
+                })
+
+            else: 
+                
