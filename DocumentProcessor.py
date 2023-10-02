@@ -49,10 +49,10 @@ class DocumentProcessor:
         if self.word_is_valid(word):
             page = self.cache.get(word, title)
 
-            if page:
-                page.increment_occurrence(score)
-            else:
+            if not page:
                 page = Page(title, text)
+                
+            page.increment_occurrence(score)
 
             self.cache.insert(word, title, page)
 
