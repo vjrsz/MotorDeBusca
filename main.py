@@ -1,71 +1,14 @@
-import xml.etree.ElementTree as ET
-from operator import itemgetter
+from DocumentProcessor import DocumentProcessor
 
-def count_word_in_text(word, text, count = 0):
-    text = text.split()
-    for s in text:
-        if word.lower() in s.lower():
-            count += 1
-    return count
+print("loading...")
 
-def print_result(results):
-    results = sorted(results, key=itemgetter('occurences'), reverse=True) # order by occurences DESC
+processor = DocumentProcessor("./data/verbetesWikipedia.xml")
+processor.load_words()
 
-    f = open("result.txt", "w") 
-    for page in results[0:20]:
-        f.write(f'{page["title"]} {page["occurences"]}\n')
-        print(f'{page["title"]} {page["occurences"]}\n')
-    f.close()
-
-tree = ET.parse("verbetesWikipedia.xml")
-root = tree.getroot()
-
-cache = {}
-while(1):
+while True:
     search = input("::: ")
 
-    if search in cache: # exists in cache
-        print_result(cache[search])
-    else:
-        cache[search] = []
-        for page in root.findall('page'):
-            title = page.find("title").text
-            text = page.find("text").text
+    if not search:
+        break
 
-            occurences = count_word_in_text(search, text)
-            if search.lower() in page.find('title').text.lower():
-                occurences += 10
-            
-            cache[search].append({
-                "title": title,
-                "text": text,
-                "occurences": occurences
-            })
-
-        print_result(cache[search])
-
-    import xml.etree.ElementTree as ET
-from operator import itemgetter
-from collections import defaultdict
-
-tree = ET.parse("verbetesWikipedia.xml")
-root = tree.getroot()
-
-cache = defaultdict(lambda: 0)
-
-# Init Cache
-for page in root.findall('page'): # for in pages
-    title = page.find("title").text
-    text = page.find("text").text
-
-    # find word in title
-    for word in title.split():
-        if len(word) > 3 :
-            if not cache[word]:
-                cache[word] = list({
-                    "title": title,
-                    "occurences": 1
-                })
-
-            else: 
-                
+    processor.search(search)
