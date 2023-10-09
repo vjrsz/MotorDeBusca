@@ -1,15 +1,16 @@
 import time
 
-from DocumentProcessor import DocumentProcessor
+from DocumentController import DocumentController
+from DocumentRepository import DocumentRepository
 
 print("loading...")
 start = time.time()
 
-processor = DocumentProcessor("./data/verbetesWikipedia.xml")
-processor.load_words()
+DocumentController.load()
+DocumentRepository.show()
 
 end = time.time()
-print(f"{end - start}s ...")
+print(f"time: {end - start}s")
 
 while True:
     search = input("::: ")
@@ -17,4 +18,4 @@ while True:
     if not search:
         break
 
-    processor.search(search)
+    DocumentController.search(search)

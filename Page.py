@@ -1,8 +1,9 @@
 class Page:
-    def __init__(self, title, text):
+    def __init__(self, id: int, title: str, text: str):
+        self.id = id
         self.title = title
         self.text = text
-        self.occurrences = 1
+        self.count = 0
 
-    def increment_occurrence(self, value):
-        self.occurrences += value
+    def increment_count(self, value: float):
+        self.count += value

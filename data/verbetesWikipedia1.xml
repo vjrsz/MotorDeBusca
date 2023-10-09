@@ -1,0 +1,22 @@
+<collection>
+	<page>
+		<id>1</id>
+		<title>Page 1</title>
+		<text>Science computer tester course Science computer</text>
+	</page>
+	<page>
+		<id>2</id>
+		<title>Page 2</title>
+		<text>Science tester computer course</text>
+	</page>
+	<page>
+		<id>3</id>
+		<title>Page 3</title>
+		<text>Science computer tester course</text>
+	</page>
+	<page>
+		<id>4</id>
+		<title>Page 4</title>
+		<text>Science tester course</text>
+	</page>
+</collection>
