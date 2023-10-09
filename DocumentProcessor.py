@@ -11,6 +11,7 @@ class DocumentProcessor:
         root = XMLDocument(src)
 
         for page in root.get_pages():
+            print(count)
             (id, title, text) = (root.get_id(page), root.get_title(page), root.get_text(page))
 
             contents = DocumentProcessor.create_contents(title, text)

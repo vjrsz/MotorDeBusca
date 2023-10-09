@@ -24,7 +24,7 @@ class DocumentRepository:
 
     @staticmethod
     def get_relationship(word1, word2):
-        if DocumentRepository.exist_word(word1) and DocumentRepository.exist_word(word2):
+        if DocumentRepository.exist_relationship(word1, word2):
             return DocumentRepository._database[word1][word2]
         return None
 
