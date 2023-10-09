@@ -79,4 +79,4 @@ class DocumentRepository:
 
     @staticmethod
     def show():
-        print(len(DocumentRepository._database.nodes()))
+        print(f"{len(DocumentRepository._database.nodes())} items")
