@@ -3,6 +3,7 @@ import networkx as nx
 
 
 class DocumentRepository:
+    _pages = defaultdict(lambda: 0)
     _database = nx.Graph()
     _last_word = None
 
@@ -17,6 +18,8 @@ class DocumentRepository:
 
     @staticmethod
     def insert_relationship(word1, word2, page):
+        DocumentRepository._pages[page.id] = page
+
         if not DocumentRepository.exist_relationship(word1, word2):
             DocumentRepository._database.add_edge(word1, word2, pages=defaultdict(lambda: 0))
 
@@ -50,6 +53,10 @@ class DocumentRepository:
             return DocumentRepository._database.nodes[word]['pages'][id]
 
     @staticmethod
+    def get_pages():
+        return DocumentRepository._pages
+
+    @staticmethod
     def get_pages_from_word(word1, word2):
 
         _word1 = DocumentRepository.get_word(word1)
@@ -79,4 +86,11 @@ class DocumentRepository:
 
     @staticmethod
     def show():
-        print(f"{len(DocumentRepository._database.nodes())} items")
+        print(f"{len(DocumentRepository._database.nodes())} words")
+        nx.write_edgelist(
+            DocumentRepository._database,  # grafo
+            "grafo2.csv",  # nome do arquivo
+            delimiter=",",  # separador
+            data=False,  # se True, grava dados do peso das arestas
+            encoding='utf-8'  # codificação
+        )

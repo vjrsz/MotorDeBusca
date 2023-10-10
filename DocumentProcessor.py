@@ -19,6 +19,7 @@ class DocumentProcessor:
                 for word in c['content']:
                     DocumentProcessor.process_word(word.lower(), id, title, text, c['score'])
 
+        print(f"{len(root.get_pages())} pages")
         return
 
     @staticmethod

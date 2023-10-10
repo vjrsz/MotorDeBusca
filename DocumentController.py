@@ -20,7 +20,17 @@ class DocumentController:
     @staticmethod
     def show_pages(pages, limit=20):
         for key in list(pages.keys())[:limit]:
-            print(f"{pages[key].title} {pages[key].count}")
+            print(f"{pages[key].id} {pages[key].title} {pages[key].count}")
+        print("\n\n")
+
+
+    @staticmethod
+    def pages():
+        pages = DocumentRepository.get_pages()
+
+        for key in list(pages.keys()):
+            print(f"{pages[key].id} {pages[key].title}")
+        print("\n\n")
 
     @staticmethod
     def load():
